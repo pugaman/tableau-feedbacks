@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.template.web-mvc</groupId>
+    <artifactId>model</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>model</name>
+    <description>Model definitions and generated sources</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--
+                    If we e.g. execute on JDK 1.7, we should compile for Java 7 to get
+                    the same (or higher) JAXB API version as used during the xjc execution.
+                -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Plugin required to build java classes from XSD using XJC -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnNoSchemas>false</failOnNoSchemas>
+                    <generateEpisode>false</generateEpisode>
+                    <noGeneratedHeaderComments>false</noGeneratedHeaderComments>
+                    <verbose>true</verbose>
+                    <!--
+                        You may include the sources from 3 locations:
+                        1) a directory (including recursively finding all files in it)
+                        2) an explicitly named file
+                        3) a non-existent path, which is silently ignored
+                    -->
+                    <sources>
+                        <source>src/main/resources/definitions</source>
+                    </sources>
+                    <xjbSources>
+                        <xjbSource>src/main/resources/bindings</xjbSource>
+                    </xjbSources>
+                    <packageName>com.template.model</packageName>
+                    <outputDirectory>src/main/java</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,56 @@
+<configuration>
+
+    <springProfile name="production">
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${catalina.base}/log/template.log</file>
+            <append>true</append>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- daily rollover -->
+                <fileNamePattern>${catalina.base}/log/template.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <!-- keep 30 days' worth of history -->
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>%d{ISO8601} %p %t %c{0}.%M - %m%n</pattern>
+                <charset>utf8</charset>
+            </encoder>
+        </appender>
+
+        <logger name="javamelody" additivity="false">
+            <level value="WARN"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+
+    </springProfile>
+
+    <springProfile name="!production">
+
+        <!-- put your appenders -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+            <encoder>
+                <pattern>%d{ISO8601} %p %t %c{0}.%M - %m%n</pattern>
+                <charset>utf8</charset>
+            </encoder>
+        </appender>
+
+        <logger name="com.template" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <logger name="javamelody" level="WARN" additivity="false"/>
+
+        <!-- put your root here -->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+</configuration>

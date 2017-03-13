@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.template.web-mvc</groupId>
+    <artifactId>database</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Database migration</name>
+
+    <properties>
+        <urlSQL>jdbc:postgresql://localhost:5432/tableau_feedbacks</urlSQL>
+        <userSQL>postgres</userSQL>
+        <passwordSQL>postgres</passwordSQL>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <finalName>tableau-feedbacks</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.1.2</version>
+                <configuration>
+                    <url>${urlSQL}</url>
+                    <user>${userSQL}</user>
+                    <password>${passwordSQL}</password>
+                    <validateOnMigrate>true</validateOnMigrate>
+                    <sqlMigrationPrefix>V</sqlMigrationPrefix>
+                    <schemas>
+                        <schema>feedbacks</schema>
+                    </schemas>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.0.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
