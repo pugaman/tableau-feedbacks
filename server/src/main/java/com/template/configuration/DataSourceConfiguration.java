@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 /**
  * Created by pgolovenkov on 06.03.2017.
  */
-@Configuration
+//@Configuration
 public class DataSourceConfiguration {
 
     private static final Logger LOG = Logger.getLogger(DataSourceConfiguration.class);

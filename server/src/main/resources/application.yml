@@ -4,7 +4,7 @@ spring:
   profiles: development
 
 datasource:
-  url: jdbc:postgresql://localhost:5432/template
+  url: jdbc:postgresql://localhost:5432/feedbacks
   username: postgres
   password: postgres
   driver-class-name: org.postgresql.Driver

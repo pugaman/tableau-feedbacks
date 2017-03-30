@@ -21,9 +21,9 @@ import java.util.Properties;
 /**
  * Created by pgolovenkov on 06.03.2017.
  */
-@Configuration
-@EnableJpaRepositories(basePackages = {"com.template.dao.repository"})
-@EnableTransactionManagement
+//@Configuration
+//@EnableJpaRepositories(basePackages = {"com.template.dao.repository"})
+//@EnableTransactionManagement
 public class JpaConfiguration {
 
     private static final Logger LOG = Logger.getLogger(JpaConfiguration.class);
